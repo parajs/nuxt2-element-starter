@@ -1,79 +1,115 @@
 <template>
-  <el-form ref="form" :model="form" label-width="80px">
-    <el-form-item label="活动名称">
-      <el-input v-model="form.name"></el-input>
-    </el-form-item>
-    <el-form-item label="活动区域">
-      <el-select v-model="form.region" placeholder="请选择活动区域">
-        <el-option label="区域一" value="shanghai"></el-option>
-        <el-option label="区域二" value="beijing"></el-option>
-      </el-select>
-    </el-form-item>
-    <el-form-item label="活动时间">
-      <el-col :span="11">
-        <el-date-picker
-          v-model="form.date1"
-          type="date"
-          placeholder="选择日期"
+  <el-card class="box-card">
+    <el-form ref="ruleForm" :rules="rules" :model="form" class="text-center">
+      <h3 class="title">登录</h3>
+      <el-form-item prop="username">
+        <el-input
+          v-model="form.username"
+          size="large"
+          placeholder="请输入邮箱账号"
+        ></el-input>
+      </el-form-item>
+      <el-form-item prop="password" class="mt-8">
+        <el-input
+          v-model="form.password"
+          type="password"
+          show-password
+          size="large"
+          placeholder="输入密码"
+          @keyup.enter="onSubmit"
+        ></el-input>
+      </el-form-item>
+      <el-form-item>
+        <div class="flexItem"></div>
+        <el-button type="text" color="red" @click="forgetpasswprd">
+          忘记密码？
+        </el-button>
+      </el-form-item>
+      <el-form-item>
+        <el-button
+          :disabled="isLoading"
+          size="large"
           style="width: 100%"
-        ></el-date-picker>
-      </el-col>
-      <el-col class="line" :span="2">-</el-col>
-      <el-col :span="11">
-        <el-time-picker
-          v-model="form.date2"
-          placeholder="选择时间"
-          style="width: 100%"
-        ></el-time-picker>
-      </el-col>
-    </el-form-item>
-    <el-form-item label="即时配送">
-      <el-switch v-model="form.delivery"></el-switch>
-    </el-form-item>
-    <el-form-item label="活动性质">
-      <el-checkbox-group v-model="form.type">
-        <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-        <el-checkbox label="地推活动" name="type"></el-checkbox>
-        <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-        <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-      </el-checkbox-group>
-    </el-form-item>
-    <el-form-item label="特殊资源">
-      <el-radio-group v-model="form.resource">
-        <el-radio label="线上品牌商赞助"></el-radio>
-        <el-radio label="线下场地免费"></el-radio>
-      </el-radio-group>
-    </el-form-item>
-    <el-form-item label="活动形式">
-      <el-input v-model="form.desc" type="textarea"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="onSubmit">立即创建</el-button>
-      <el-button>取消</el-button>
-    </el-form-item>
-  </el-form>
+          type="primary"
+          round
+          @click="onSubmit"
+          >登录</el-button
+        >
+      </el-form-item>
+    </el-form>
+  </el-card>
 </template>
 
 <script>
+import { md5Encode } from '~/shared'
 export default {
+  middleware: 'notAuth',
   data() {
     return {
+      isLoading: false,
       form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: '',
+        username: '',
+        password: '',
+      },
+      rules: {
+        username: [
+          {
+            required: true,
+            message: '请输入邮箱账号',
+            trigger: 'blur',
+          },
+        ],
+        password: [
+          {
+            required: true,
+            message: '请输入密码',
+            trigger: 'blur',
+          },
+        ],
       },
     }
   },
   methods: {
     onSubmit() {
-      console.log('submit!')
+      this.$refs.ruleForm.validate((valid) => {
+        if (valid) {
+          const pwd = md5Encode(this.form.password)
+          this.$store
+            .dispatch('loginPassword', {
+              username: this.form.username,
+              password: pwd,
+            })
+            .then(() => {
+              const { redirect } = this.$route.query
+              if (redirect) {
+                this.$router.push(redirect)
+              } else {
+                this.$router.push('/user/personal')
+              }
+            })
+        } else {
+          return false
+        }
+      })
+    },
+    forgetpasswprd() {
+      this.$router.push('/user/forgetPwd')
     },
   },
 }
 </script>
+
+<style scoped>
+.title {
+  text-align: center;
+  font-size: 22px;
+  color: black;
+  margin-bottom: 30px;
+}
+
+.box-card {
+  position: relative;
+  margin: 100px auto 0;
+  max-width: 500px;
+}
+</style>

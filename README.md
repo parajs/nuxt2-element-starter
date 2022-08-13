@@ -72,3 +72,7 @@ More information about the usage of this directory in [the documentation](https:
 - [nuxtjs.org](https://nuxtjs.org/)
 - [typescript.nuxtjs](https://typescript.nuxtjs.org/cookbook/plugins/)
 - [composition-api](https://composition-api.nuxtjs.org/)
+- [环境变量设置](https://xmanyou.com/node-vue-nuxt-process-env-details/amp/)
+- [Nuxt.js 中未获取到返回的参数值](https://blog.csdn.net/mrmengj/article/details/113109352)
+- [nuxt 使用 vuex 存储及获取用户信息踩坑的解决](https://www.jb51.net/article/246530.htm)
+- [nuxt.js 服务端请求时带上 token 实现详解](https://www.jianshu.com/p/0da125ec3f95)

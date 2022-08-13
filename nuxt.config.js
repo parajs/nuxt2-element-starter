@@ -15,10 +15,14 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['element-ui/lib/theme-chalk/index.css'],
+  css: ['@/style/theme/index.css'],
+
+  router: {
+    middleware: ['user-agent'],
+  },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/element-ui'],
+  plugins: ['@/plugins/element-ui', '@/plugins/axios'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -35,14 +39,37 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
+    'cookie-universal-nuxt',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: process.env.PUBLIC_URL,
+  // axios: {
+  //   proxy: true,
+  //   // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
+  //   baseURL: "https://api.nuxtjs.dev/api",
+  // },
+  proxy: {
+    '/api/': {
+      target: 'http://www.kuggamax2.paradeum.com:8010',
+      // changeOrigin: true,
+      // pathRewrite: { "^/api/": "" },
+    },
   },
-
+  publicRuntimeConfig: {
+    axios: {
+      proxy: true,
+      // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
+      // 定义用于发出客户端请求的基本 URL,生产环境中浏览器可见
+      browserBaseURL: '/api/v1',
+    },
+  },
+  privateRuntimeConfig: {
+    axios: {
+      // 定义用于发出服务器端请求的基本 URL,生产环境中浏览器不可见，服务端可见
+      baseURL: 'http://www.kuggamax2.paradeum.com:8010/api/v1',
+    },
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/],
