@@ -1,22 +1,15 @@
 <template>
-  <el-header>
-    <span>个人中心</span>
-    <el-button type="primary" @click="logout">退出</el-button>
-  </el-header>
+   <div>
+     <common-header></common-header>
+     1111111111
+   </div>
+
 </template>
 
 <script>
 export default {
   name: 'Personal',
   middleware: 'auth',
-  methods: {
-    async logout() {
-      try {
-        await this.$store.dispatch('logout')
-      } catch (e) {
-        this.formError = e.message
-      }
-    },
-  },
+ 
 }
 </script>

@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>nuxt常用功能测试</h2>
+    <div>{{ $t('topbar.home')}}</div>
     <div>
       获取store中数据：{{ $store.state.counter }}
       <el-button type="primary" @click="update">更新状态数据</el-button>
@@ -9,12 +10,12 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   computed: {
-    counter() {
-      return this.$store.state.counter
-    },
+     ...mapState([ 'locale','locales','counter' ]),
   },
+
   methods: {
     update() {
       this.$store.commit('mutateState', { counter: this.counter + 1 })
