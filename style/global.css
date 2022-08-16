@@ -269,9 +269,18 @@ a {
   background-color: #ff6e00;
 }
 
-.page-content {
+.page-content-700 {
+  margin: 0 auto;
+  max-width: 700px;
+  box-sizing: border-box;
+  padding: 60px 10px;
+}
+
+
+.page-content-1200 {
   margin: 0 auto;
   max-width: 1000px;
-  padding: 0 20px;
   box-sizing: border-box;
+  padding: 60px 10px;
+
 }

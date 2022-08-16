@@ -7,9 +7,7 @@
         width: size+'px'
       }"
     >
-     <template v-if="src">
-         <img :src="src"/>
-     </template>
+    <img v-if="src" :src="src" loading="lazy"/>
      <template v-else>
         {{text}}
      </template>
@@ -17,8 +15,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-export default defineComponent({
+export default {
      props: {
         size: {
             type: [Number, String],
@@ -37,7 +34,7 @@ export default defineComponent({
             default: ""
         }
      },   
-}) 
+}
 </script>
 <style scoped>
 .avatar-box {
@@ -52,6 +49,7 @@ export default defineComponent({
   vertical-align: middle;
   overflow: hidden;
   color: #fff;
+  cursor: pointer;
 }
 
 .avatar-box img {

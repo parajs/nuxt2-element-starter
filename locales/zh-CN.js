@@ -1,5 +1,6 @@
 export default {
-  topbar: {
-    home: "首页",
+  header: {
+    login: "登录",
+    signup: "注册",
   },
 };

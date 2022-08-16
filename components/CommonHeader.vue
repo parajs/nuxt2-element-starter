@@ -1,24 +1,54 @@
 <template>
-  <el-header>
-    <div class="flex flexItem" style="cursor: pointer">
-      <img src="~/static/logo.png" style="width: 40px; height: 40px" />
-      <h2 class="title">DukeForum</h2>
-    </div>
-      <el-dropdown class="ml-8">
-        <Avatar
-          size="40"
-          :src="user.avatar"
-          :color="user.userBackcolor"
-          :text="user.userAbbr"
-        />
-        <template #dropdown>
-          <el-dropdown-menu style="width: 140px">
-            <el-dropdown-item @click="logout">
-              <div class="dropdown-item">退出</div>
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
+  <el-header class="header-fixed">
+      <nuxt-link :to="localePath('/')"  class="flex flexItem">
+        <img src="~/static/logo.png" style="width: 45px; height: 45px" />
+        <h2 class="title">DukeForum</h2>
+      </nuxt-link>
+        <el-dropdown  class="ml-8" placement="bottom" trigger="click">
+          <div class="flex lang">
+            <svg style="width:20px" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" class="d-icon w-6 h-6 m-auto text-gray-300 hover:text-primary-400"><path d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
+            <i class="el-icon-arrow-down"></i>
+          </div>
+          <template #dropdown>
+            <el-dropdown-menu >
+                <el-dropdown-item v-for="(item ) in availableLocales" :key="item.code"  @click.native="$i18n.setLocale(item.code)">
+                <div class="dropdown-item">{{item.name}}</div>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+        <el-dropdown v-if="user" class="ml-8" placement="bottom" trigger="click">
+          <Avatar
+            size="30"
+            :src="user.avatar"
+            :color="user.userBackcolor"
+            :text="user.userAbbr"
+          />
+          <template #dropdown>
+            <el-dropdown-menu style="width: 160px">
+              <el-dropdown-item >
+                <div class="dropdown-item"><i class="el-icon-plus"></i>创建临时论坛</div>
+              </el-dropdown-item>
+              <el-dropdown-item >
+                <div class="dropdown-item"><i class="el-icon-user"></i>个人主页</div>
+              </el-dropdown-item>
+              <el-dropdown-item >
+                <div class="dropdown-item"><i class="el-icon-setting"></i>账户设置</div>
+              </el-dropdown-item>
+                <el-dropdown-item >
+                <div class="dropdown-item"><i class="el-icon-edit-outline"></i>意见反馈</div>
+              </el-dropdown-item>
+                
+              <el-dropdown-item @click.native="logout">
+                <div class="dropdown-item"><i class="el-icon-edit"></i>退出</div>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+        <div v-else class="login">
+          <nuxt-link  to="user/login">{{$t('header.login')}}</nuxt-link>
+            <nuxt-link to="user/register">{{$t('header.signup')}}</nuxt-link>
+        </div>
   </el-header>
 </template>
 <script>
@@ -27,49 +57,56 @@ export default {
     name: 'CommonHeader',
     computed: {
      ...mapState(['user']),
+      availableLocales () {
+      return this.$i18n.locales.filter((item)=> item.code !== this.$i18n.locale)
+    },
    },
     methods: {
-        async logout() {
-          await this.$store.dispatch('logout')
+         logout() {
+           this.$store.dispatch('logout')
         },
     },
 }
 
 </script>
 <style scoped>
-.el-header {
-  border-bottom: 1px solid #dddd;
+.header-fixed {
   background-color: #000;
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 300;
   display: flex;
   align-items: center;
-  color: #fff;
 }
 
-.item {
-  margin-top: 10px;
+
+.lang {
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
 }
 
 .title {
   margin: 0;
   margin-left: 10px;
-  font-size: 22px;
+  font-size: 20px;
   color: #fff;
   text-decoration: none;
   position: relative;
+  font-weight: normal;
 }
 
-
-.btn-common {
-  color: #fff;
-  padding-left: 10px;
-  padding-right: 10px;
-  font-size: 18px;
-  font-weight: bold;
-}
 
 .dropdown-item {
-  padding: 8px 0;
-  text-align: center;
+  padding: 4px 0;
   flex: 1;
+}
+
+.login a{
+  color: #fff;
+  padding: 10px;
+  font-size: 16px;
 }
 </style>

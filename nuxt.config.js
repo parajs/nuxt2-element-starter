@@ -56,7 +56,7 @@ export default {
     locales: [
       {
         code: "en-US",
-        name: "english",
+        name: "English",
         iso: "en-US",
         file: "en-US.js",
       },
@@ -65,6 +65,12 @@ export default {
         name: "简体中文",
         iso: "zh-CN",
         file: "zh-CN.js",
+      },
+      {
+        code: "tw-CN",
+        name: "繁體中文",
+        iso: "tw-CN",
+        file: "tw-CN.js",
       },
     ],
     lazy: true,
@@ -102,6 +108,7 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    postcss: null,
     analyze: true,
     transpile: [/^element-ui/],
   },

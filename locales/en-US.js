@@ -1,5 +1,6 @@
 export default {
-  topbar: {
-    home: "home",
+  header: {
+    login: "log in",
+    signup: "sign up",
   },
 };
