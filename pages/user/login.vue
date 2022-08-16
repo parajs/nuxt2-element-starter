@@ -1,7 +1,8 @@
 <template>
-  <el-card class="box-card">
-    <el-form ref="ruleForm" :rules="rules" :model="form" class="text-center">
-      <h3 class="title">登录</h3>
+<div>
+  <div class="box-card">
+    <el-form ref="ruleForm" :rules="rules" :model="form" >
+      <h3 class="title">登 录</h3>
       <el-form-item prop="username">
         <el-input
           v-model="form.username"
@@ -19,11 +20,17 @@
           @keyup.enter="onSubmit"
         ></el-input>
       </el-form-item>
-      <el-form-item>
-        <div class="flexItem"></div>
-        <el-button type="text" color="red" @click="forgetpasswprd">
-          忘记密码？
-        </el-button>
+      <el-form-item >
+        <div class="flex">
+             <div class="flexItem">
+                <nuxt-link class="link" to="/user/signup">
+                    还没账号，去注册>>
+                </nuxt-link>
+              </div>
+             <nuxt-link  class="link"  to="/user/forgetPwd">
+              忘记密码？
+             </nuxt-link>
+        </div>
       </el-form-item>
       <el-form-item>
         <el-button
@@ -37,7 +44,9 @@
         >
       </el-form-item>
     </el-form>
-  </el-card>
+  </div>
+</div>
+  
 </template>
 
 <script>
@@ -67,6 +76,13 @@ export default {
           },
         ],
       },
+    }
+  },
+  head() {
+    return {
+      bodyAttrs: {
+        class: 'login-page'
+      }
     }
   },
   methods: {
@@ -100,16 +116,29 @@ export default {
 </script>
 
 <style scoped>
+
+
 .title {
   text-align: center;
   font-size: 22px;
-  color: black;
+  color: #f2f2f2;
   margin-bottom: 30px;
+}
+
+.link {
+  color: #cecbcb;
+  font-size: 12px;
 }
 
 .box-card {
   position: relative;
   margin: 100px auto 0;
   max-width: 500px;
+  padding: 20px;
 }
+
+:global(.login-page) {
+   background:#131232
+}
+
 </style>

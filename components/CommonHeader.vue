@@ -1,6 +1,6 @@
 <template>
   <el-header class="header-fixed">
-      <nuxt-link :to="localePath('/')"  class="flex flexItem">
+      <nuxt-link to="/"  class="flex flexItem">
         <img src="~/static/logo.png" style="width: 45px; height: 45px" />
         <h2 class="title">DukeForum</h2>
       </nuxt-link>
@@ -46,8 +46,8 @@
           </template>
         </el-dropdown>
         <div v-else class="login">
-          <nuxt-link  to="user/login">{{$t('header.login')}}</nuxt-link>
-            <nuxt-link to="user/register">{{$t('header.signup')}}</nuxt-link>
+            <nuxt-link to="/user/login">{{$t('header.login')}}</nuxt-link>
+            <nuxt-link to="/user/login">{{$t('header.signup')}}</nuxt-link>
         </div>
   </el-header>
 </template>

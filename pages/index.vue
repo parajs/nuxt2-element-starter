@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     navigate(id){
-      this.$router.push(this.localePath(`/topic/${id}`))
+      this.$router.push(`/topic/${id}`)
     },
     scroll(){
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -66,7 +66,6 @@ export default {
 <style scoped>
 
 .header-trans {
-   animation-name: to-transparent;
    animation-duration: 500ms;
    background: transparent;
 }

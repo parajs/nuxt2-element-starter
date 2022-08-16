@@ -49,6 +49,7 @@ export default {
     "@nuxtjs/i18n",
   ],
   i18n: {
+    strategy: "no_prefix",
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: "locale",
