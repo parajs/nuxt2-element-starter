@@ -7,8 +7,8 @@
       </el-carousel-item>
     </el-carousel>
     <div class="page-content-700">
-        <el-card
-        v-for="(item) in list"
+      <el-card
+        v-for="item in list"
         :key="item.id"
         class="box-card"
         :header="item.title"
@@ -27,47 +27,51 @@ export default {
   components: { CommonHeader },
   async asyncData({ $axios }) {
     const { list = [] } = await $axios.$get('/item/GetHomeList', {
-      pageIndex: 1,
-      pageSize: 10,
+      params: {
+        pageIndex: 1,
+        pageSize: 10,
+      },
     })
     return { list }
   },
-  data(){
+  data() {
     return {
       isTransparent: true,
     }
   },
   // 切换语言
   computed: {
-    availableLocales () {
+    availableLocales() {
       return this.$i18n.locales
     },
-    calcClass(){
+    calcClass() {
       return this.isTransparent ? 'header-trans' : 'header-black'
-    }
+    },
   },
-  mounted(){
-    document.addEventListener('scroll', this.scroll);
+  mounted() {
+    document.addEventListener('scroll', this.scroll)
   },
-  unmounted(){
-    document.removeEventListener('scroll', this.scroll);
+  unmounted() {
+    document.removeEventListener('scroll', this.scroll)
   },
   methods: {
-    navigate(id){
+    navigate(id) {
       this.$router.push(`/topic/${id}`)
     },
-    scroll(){
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      scrollTop > 100 ? this.isTransparent = false :  this.isTransparent = true;
-    }
-  }
+    scroll() {
+      const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop
+      scrollTop > 100
+        ? (this.isTransparent = false)
+        : (this.isTransparent = true)
+    },
+  },
 }
 </script>
 <style scoped>
-
 .header-trans {
-   animation-duration: 500ms;
-   background: transparent;
+  animation-duration: 500ms;
+  background: transparent;
 }
 
 .header-black {
@@ -77,34 +81,42 @@ export default {
   animation-fill-mode: paused;
 }
 
-
 @keyframes to-black {
-   from { background: transparent; }
-   to { background: #000; }
-}
+  from {
+    background: transparent;
+  }
 
+  to {
+    background: #000;
+  }
+}
 
 @keyframes to-transparent {
-   from { background: #000;}
-   to { background: transparent;}
+  from {
+    background: #000;
+  }
+
+  to {
+    background: transparent;
+  }
 }
 
- .el-carousel__item h3 {
-    color: #475669;
-    font-size: 18px;
-    opacity: 0.75;
-    line-height: 300px;
-    text-align: center;
-    margin: 0;
-  }
-  
-  .el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
-  }
-  
-  .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
-  }
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 18px;
+  opacity: 0.75;
+  line-height: 300px;
+  text-align: center;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+}
 
 .title {
   margin-top: 40px;

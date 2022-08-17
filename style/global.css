@@ -151,7 +151,7 @@ a {
 .pa-2 {
   padding: 8px !important;
 }
-.pt-4{
+.pt-4 {
   padding-top: 16px !important;
 }
 .pa-3 {
@@ -276,11 +276,9 @@ a {
   padding: 60px 10px;
 }
 
-
 .page-content-1200 {
   margin: 0 auto;
   max-width: 1000px;
   box-sizing: border-box;
   padding: 60px 10px;
-
 }

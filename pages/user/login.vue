@@ -1,57 +1,63 @@
 <template>
-<div>
-  <div class="box-card">
-    <el-form ref="ruleForm" :rules="rules" :model="form" >
-      <h3 class="title">登 录</h3>
-      <el-form-item prop="username">
-        <el-input
-          v-model="form.username"
-          size="large"
-          placeholder="请输入邮箱账号"
-        ></el-input>
-      </el-form-item>
-      <el-form-item prop="password" class="mt-8">
-        <el-input
-          v-model="form.password"
-          type="password"
-          show-password
-          size="large"
-          placeholder="输入密码"
-          @keyup.enter="onSubmit"
-        ></el-input>
-      </el-form-item>
-      <el-form-item >
-        <div class="flex">
-             <div class="flexItem">
-                <nuxt-link class="link" to="/user/signup">
-                    还没账号，去注册>>
-                </nuxt-link>
-              </div>
-             <nuxt-link  class="link"  to="/user/forgetPwd">
+  <div>
+    <el-header class="flex">
+      <nuxt-link to="/" class="flex">
+        <img src="~/static/logo.png" style="width: 45px; height: 45px" />
+        <h2 class="title">DukeForum</h2>
+      </nuxt-link>
+    </el-header>
+    <div class="box-card">
+      <el-form ref="ruleForm" :rules="rules" :model="form">
+        <h3 class="card-title">登 录</h3>
+        <el-form-item prop="username">
+          <el-input
+            v-model="form.username"
+            size="large"
+            placeholder="请输入邮箱账号"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="password" class="mt-8">
+          <el-input
+            v-model="form.password"
+            type="password"
+            show-password
+            size="large"
+            placeholder="输入密码"
+            @keyup.enter="onSubmit"
+          ></el-input>
+        </el-form-item>
+        <el-form-item>
+          <div class="flex">
+            <div class="flexItem">
+              <nuxt-link class="link" to="/user/signup">
+                还没账号，去注册>>
+              </nuxt-link>
+            </div>
+            <nuxt-link class="link" to="/user/forgetPwd">
               忘记密码？
-             </nuxt-link>
-        </div>
-      </el-form-item>
-      <el-form-item>
-        <el-button
-          :disabled="isLoading"
-          size="large"
-          style="width: 100%"
-          type="primary"
-          round
-          @click="onSubmit"
-          >登录</el-button
-        >
-      </el-form-item>
-    </el-form>
+            </nuxt-link>
+          </div>
+        </el-form-item>
+        <el-form-item>
+          <el-button
+            :disabled="isLoading"
+            size="large"
+            style="width: 100%"
+            type="primary"
+            round
+            @click="onSubmit"
+            >登录</el-button
+          >
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
-</div>
-  
 </template>
 
 <script>
 import { md5Encode } from '~/shared'
 export default {
+  name: 'Login',
   middleware: 'notAuth',
   data() {
     return {
@@ -81,8 +87,8 @@ export default {
   head() {
     return {
       bodyAttrs: {
-        class: 'login-page'
-      }
+        class: 'login-page',
+      },
     }
   },
   methods: {
@@ -116,9 +122,17 @@ export default {
 </script>
 
 <style scoped>
-
-
 .title {
+  margin: 0;
+  margin-left: 10px;
+  font-size: 20px;
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  font-weight: normal;
+}
+
+.card-title {
   text-align: center;
   font-size: 22px;
   color: #f2f2f2;
@@ -138,7 +152,6 @@ export default {
 }
 
 :global(.login-page) {
-   background:#131232
+  background: #131232;
 }
-
 </style>

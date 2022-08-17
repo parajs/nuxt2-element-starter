@@ -1,6 +1,6 @@
 export default {
   header: {
-    login: "log in",
-    signup: "sign up",
+    login: 'log in',
+    signup: 'sign up',
   },
-};
+}

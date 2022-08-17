@@ -1,39 +1,39 @@
 <template>
-    <div
-      class="avatar-box"
-      :style="{
-        backgroundColor: src ? '' : color,
-        height: size+'px',
-        width: size+'px'
-      }"
-    >
-    <img v-if="src" :src="src" loading="lazy"/>
-     <template v-else>
-        {{text}}
-     </template>
-    </div>
+  <div
+    class="avatar-box"
+    :style="{
+      backgroundColor: src ? '' : color,
+      height: size + 'px',
+      width: size + 'px',
+    }"
+  >
+    <img v-if="src" :src="src" loading="lazy" />
+    <template v-else>
+      {{ text }}
+    </template>
+  </div>
 </template>
 
 <script>
 export default {
-     props: {
-        size: {
-            type: [Number, String],
-            default: 30
-        },
-        color: {
-            type: String,
-            default: "#fff"
-        },
-        src: {
-            type: String,
-            default: ""
-        },
-        text: {
-            type: String,
-            default: ""
-        }
-     },   
+  props: {
+    size: {
+      type: [Number, String],
+      default: 30,
+    },
+    color: {
+      type: String,
+      default: '#fff',
+    },
+    src: {
+      type: String,
+      default: '',
+    },
+    text: {
+      type: String,
+      default: '',
+    },
+  },
 }
 </script>
 <style scoped>
@@ -59,5 +59,4 @@ export default {
   width: inherit;
   background-size: cover;
 }
-
 </style>
