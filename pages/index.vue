@@ -6,7 +6,7 @@
         <h3>{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>
-    <div class="page-content-700">
+    <div class="page-content-800">
       <el-card
         v-for="item in list"
         :key="item.id"

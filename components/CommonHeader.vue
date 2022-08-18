@@ -1,9 +1,6 @@
 <template>
   <el-header class="header-fixed">
-    <nuxt-link to="/" class="flex flexItem">
-      <img src="~/static/logo.png" style="width: 45px; height: 45px" />
-      <h2 class="title">DukeForum</h2>
-    </nuxt-link>
+    <Logo class="flexItem" />
     <el-dropdown class="ml-8" placement="bottom" trigger="click">
       <div class="flex lang">
         <svg

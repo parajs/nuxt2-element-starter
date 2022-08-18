@@ -1,12 +1,13 @@
 <template>
   <div>
-    <common-header></common-header>
+   dddddddddddddd
   </div>
 </template>
 
 <script>
 export default {
   name: 'Personal',
-  middleware: 'auth',
+  layout: 'layout',
+  middleware: 'auth'
 }
 </script>

@@ -1,10 +1,7 @@
 <template>
   <div>
     <el-header class="flex">
-      <nuxt-link to="/" class="flex">
-        <img src="~/static/logo.png" style="width: 45px; height: 45px" />
-        <h2 class="title">DukeForum</h2>
-      </nuxt-link>
+       <Logo />
     </el-header>
 
     <div class="box-card">
@@ -56,7 +53,7 @@
   </div>
 </template>
 <script>
-import { ElMessage } from 'element-ui'
+import { Message } from 'element-ui'
 import { md5Encode } from '~/shared'
 const reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 
@@ -127,10 +124,10 @@ export default {
         if (valid) {
           this.form.password = md5Encode(this.form.password)
           await this.$axios.$post('/user/registerByEmail', this.form)
-          ElMessage.info('注册成功')
+          Message.info('注册成功')
           this.$store
             .dispatch('loginPassword', {
-              username: this.form.username,
+              username: this.form.email,
               password: this.form.password,
             })
             .then(() => {
@@ -149,33 +146,37 @@ export default {
     },
     async getVertifyCode() {
       if (this.form.email === '') {
-        ElMessage.error('请输入邮箱账号')
+        Message.error('请输入邮箱账号')
         return
       }
-
       if (reg.test(this.form.email)) {
-        this.isSending = '发送验证码中'
-        this.disabled = true
-        const data = await this.$axios.$post('/user/getVerifyCode', {
-          email: this.form.email,
-          type: 'register',
-        })
+        try {
+            this.isSending = '发送验证码中'
+            this.disabled = true
+            await this.$axios.$post('/user/getVerifyCode', {
+              email: this.form.email,
+              type: 'register',
+            })
 
-        let second = 60
-        this.isSending.value = `${second}后可重新发送`
-        const timer = setInterval(() => {
-          if (second === 0) {
+            let second = 60
+            this.isSending = `${second}后可重新发送`
+            const timer = setInterval(() => {
+              --second
+              this.isSending = `${second}后可重新发送`
+              if (second === 0) {
+                this.isSending = '重新获取验证码'
+                this.disabled = false
+                clearInterval(timer)
+              }
+            }, 1000)
+            Message.success('邮件发送成功')
+        } catch (error) {
             this.isSending = '重新获取验证码'
             this.disabled = false
-            clearInterval(timer)
-          }
-
-          --second
-          this.isSending = `${second}后可重新发送`
-        }, 1000)
-        ElMessage.success('邮件发送成功')
+        }
+        
       } else {
-        ElMessage.error('邮箱账号不合法')
+        Message.error('邮箱账号不合法')
       }
     },
   },

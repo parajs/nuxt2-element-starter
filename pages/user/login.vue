@@ -1,11 +1,8 @@
 <template>
   <div>
     <el-header class="flex">
-      <nuxt-link to="/" class="flex">
-        <img src="~/static/logo.png" style="width: 45px; height: 45px" />
-        <h2 class="title">DukeForum</h2>
-      </nuxt-link>
-    </el-header>
+     <Logo />
+    </el-header> 
     <div class="box-card">
       <el-form ref="ruleForm" :rules="rules" :model="form">
         <h3 class="card-title">登 录</h3>
