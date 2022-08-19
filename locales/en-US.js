@@ -4,12 +4,12 @@ import enLocale from "element-ui/lib/locale/lang/en";
 export default {
   ...enLocale,
   header: {
-    login: "log in",
-    signup: "sign up",
-    createtempforum: "create temporay forum",
-    homepage: "homepage",
-    accountsetting: "account setting",
-    feedback: "feedback",
-    logout: "logout",
+    login: "Log in",
+    signup: "Sign up",
+    createtempforum: "Create temporay forum",
+    homepage: "Homepage",
+    accountsetting: "Account setting",
+    feedback: "Feedback",
+    logout: "Logout",
   },
 };

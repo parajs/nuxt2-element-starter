@@ -69,7 +69,7 @@
     </el-dropdown>
     <div v-else class="login">
       <nuxt-link to="/user/login">{{ $t('header.login') }}</nuxt-link>
-      <nuxt-link to="/user/login">{{ $t('header.signup') }}</nuxt-link>
+      <nuxt-link to="/user/signup">{{ $t('header.signup') }}</nuxt-link>
     </div>
   </el-header>
 </template>

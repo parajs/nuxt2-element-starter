@@ -103,7 +103,7 @@ export default {
               if (redirect) {
                 this.$router.push(redirect)
               } else {
-                this.$router.push('/user/personal')
+                this.$router.push('/user/homepage')
               }
             })
         } else {
