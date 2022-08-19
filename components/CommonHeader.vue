@@ -39,30 +39,30 @@
         :text="user.userAbbr"
       />
       <template #dropdown>
-        <el-dropdown-menu style="width: 160px">
-          <el-dropdown-item>
-            <div class="dropdown-item">
-              <i class="el-icon-plus"></i>创建临时论坛
+        <el-dropdown-menu >
+          <el-dropdown-item @click.native="$router.push('/tempForum/add')">
+            <div class="dropdown-item" >
+              <i class="el-icon-plus"></i>{{$t('header.createtempforum')}}
             </div>
           </el-dropdown-item>
-          <el-dropdown-item>
+          <el-dropdown-item @click.native="$router.push('/user/homepage')">
             <div class="dropdown-item">
-              <i class="el-icon-user"></i>个人主页
+              <i class="el-icon-user"></i>{{$t('header.homepage')}}
             </div>
           </el-dropdown-item>
-          <el-dropdown-item>
+          <el-dropdown-item @click.native="$router.push('/user/setting')">
             <div class="dropdown-item">
-              <i class="el-icon-setting"></i>账户设置
+              <i class="el-icon-setting"></i>{{$t('header.accountsetting')}}
             </div>
           </el-dropdown-item>
-          <el-dropdown-item>
+          <el-dropdown-item @click.native="$router.push('/user/feedback')">
             <div class="dropdown-item">
-              <i class="el-icon-edit-outline"></i>意见反馈
+              <i class="el-icon-edit-outline"></i>{{$t('header.feedback')}}
             </div>
           </el-dropdown-item>
 
           <el-dropdown-item @click.native="logout">
-            <div class="dropdown-item"><i class="el-icon-edit"></i>退出</div>
+            <div class="dropdown-item"><i class="el-icon-edit"></i>{{$t('header.logout')}}</div>
           </el-dropdown-item>
         </el-dropdown-menu>
       </template>

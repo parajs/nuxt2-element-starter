@@ -273,12 +273,14 @@ a {
   margin: 0 auto;
   max-width: 800px;
   box-sizing: border-box;
-  padding: 60px 10px;
+  padding: 10px;
+  position: relative;
 }
 
 .page-content-1200 {
   margin: 0 auto;
   max-width: 1000px;
   box-sizing: border-box;
-  padding: 60px 10px;
+  padding: 10px;
+  position: relative;
 }

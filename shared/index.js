@@ -1,11 +1,11 @@
-import md5 from 'md5'
+import md5 from "md5";
 
 /**
  * md5加密
  */
 export function md5Encode(message) {
-  const KEY = md5('LULU Derivation')
-  return md5(KEY + md5(message))
+  const KEY = md5("LULU Derivation");
+  return md5(KEY + md5(message));
 }
 
 /**
@@ -13,5 +13,5 @@ export function md5Encode(message) {
  */
 
 export function typeCheck(param) {
-  return Object.prototype.toString.call(param)
+  return Object.prototype.toString.call(param);
 }

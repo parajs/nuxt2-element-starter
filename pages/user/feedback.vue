@@ -1,12 +1,12 @@
 <template>
-  <div>
-   dddddddddddddd
+  <div class="page-content-800">
+    feedback
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Personal',
+  name: 'Feedback',
   layout: 'layout',
   middleware: 'auth'
 }
