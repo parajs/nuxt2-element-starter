@@ -25,14 +25,14 @@ import CommonHeader from '~/components/CommonHeader.vue'
 export default {
   name: 'IndexPage',
   components: { CommonHeader },
-  async asyncData({ $axios }) {
-    const { list = [] } = await $axios.$get('/item/GetHomeList', {
-      params: {
-        pageIndex: 1,
-        pageSize: 10,
-      },
-    })
-    return { list }
+  asyncData({ $axios }) {
+    // const { list = [] } = await $axios.$get('/item/GetHomeList', {
+    //   params: {
+    //     pageIndex: 1,
+    //     pageSize: 10,
+    //   },
+    // })
+    return { list: [] }
   },
   data() {
     return {

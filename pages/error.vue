@@ -1,22 +1,29 @@
 <template>
-   <el-result class="result" icon="error" :title="$route.query.statusCode" :sub-title="$route.query.statusText || '遇到错误了'">
-      <template slot="extra">
-        <el-button type="primary" size="medium" @click="$router.go(-1)">返回</el-button>
-      </template>
-    </el-result>
+  <el-result
+    class="result"
+    icon="error"
+    :title="$route.query.statusCode"
+    :sub-title="$route.query.statusText || '遇到错误了'"
+  >
+    <template slot="extra">
+      <el-button type="primary" size="medium" @click="$router.go(-1)"
+        >返回</el-button
+      >
+    </template>
+  </el-result>
 </template>
 
 <script>
 export default {
   layout: 'error',
-  data () {
+  data() {
     return {
-      state: {}
+      state: {},
     }
   },
-  head () {
+  head() {
     return {
-      title: '遇到错误了'
+      title: '遇到错误了',
     }
   },
 }

@@ -7,12 +7,13 @@
       <el-button type="primary" @click="update">更新状态数据</el-button>
     </div>
     <div>
-      element-ui国际化测试：<el-color-picker v-model="color" show-alpha></el-color-picker>
+      element-ui国际化测试：<el-color-picker
+        v-model="color"
+        show-alpha
+      ></el-color-picker>
     </div>
-    
-     <div>
-      dayjs： {{$dayjs(new Date()).format('YYYY-MM-DD')}}
-    </div>
+
+    <div>dayjs： {{ $dayjs(new Date()).format('YYYY-MM-DD') }}</div>
   </div>
 </template>
 
@@ -20,9 +21,9 @@
 import { mapState } from 'vuex'
 export default {
   layout: 'layout',
-  data(){
+  data() {
     return {
-      color: 'rgba(19, 206, 102, 0.8)'
+      color: 'rgba(19, 206, 102, 0.8)',
     }
   },
   computed: {

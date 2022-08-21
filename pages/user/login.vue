@@ -1,8 +1,8 @@
 <template>
   <div>
     <el-header class="flex">
-     <Logo />
-    </el-header> 
+      <Logo />
+    </el-header>
     <div class="box-card">
       <el-form ref="ruleForm" :rules="rules" :model="form">
         <h3 class="card-title">登 录</h3>

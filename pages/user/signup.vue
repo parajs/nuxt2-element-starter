@@ -1,12 +1,16 @@
 <template>
   <div>
     <el-header class="flex">
-       <Logo />
+      <Logo />
     </el-header>
 
     <div class="box-card">
-      <el-form ref="ruleForm" :model="form" :rules="rules" class="text-center">
+      <el-form ref="ruleForm" :model="form" :rules="rules">
         <h3 class="card-title">注 册</h3>
+        <div class="tips">
+          如果您使用的是企业或组织邮箱，Duke
+          Forum会根据您的邮箱后缀匹配到对应组织论坛中
+        </div>
         <el-form-item prop="email">
           <el-input
             v-model="form.email"
@@ -151,30 +155,29 @@ export default {
       }
       if (reg.test(this.form.email)) {
         try {
-            this.isSending = '发送验证码中'
-            this.disabled = true
-            await this.$axios.$post('/user/getVerifyCode', {
-              email: this.form.email,
-              type: 'register',
-            })
+          this.isSending = '发送验证码中'
+          this.disabled = true
+          await this.$axios.$post('/user/getVerifyCode', {
+            email: this.form.email,
+            type: 'register',
+          })
 
-            let second = 60
+          let second = 60
+          this.isSending = `${second}后可重新发送`
+          const timer = setInterval(() => {
+            --second
             this.isSending = `${second}后可重新发送`
-            const timer = setInterval(() => {
-              --second
-              this.isSending = `${second}后可重新发送`
-              if (second === 0) {
-                this.isSending = '重新获取验证码'
-                this.disabled = false
-                clearInterval(timer)
-              }
-            }, 1000)
-            Message.success('邮件发送成功')
+            if (second === 0) {
+              this.isSending = '重新获取验证码'
+              this.disabled = false
+              clearInterval(timer)
+            }
+          }, 1000)
+          Message.success('邮件发送成功')
         } catch (error) {
-            this.isSending = '重新获取验证码'
-            this.disabled = false
+          this.isSending = '重新获取验证码'
+          this.disabled = false
         }
-        
       } else {
         Message.error('邮箱账号不合法')
       }
@@ -208,9 +211,16 @@ export default {
 
 .box-card {
   position: relative;
-  margin: 60px auto 0;
+  margin: 10px auto 0;
   max-width: 500px;
   padding: 20px;
+}
+
+.tips {
+  color: #fff;
+  font-size: 12px;
+  margin-bottom: 20px;
+  line-height: 1.6;
 }
 
 .getCodeBtn {

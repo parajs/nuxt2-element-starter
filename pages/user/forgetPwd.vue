@@ -1,51 +1,46 @@
 <template>
   <div>
     <el-header class="flex">
-       <Logo />
+      <Logo />
     </el-header>
 
     <div class="box-card">
-        <el-form
-          ref="ruleForm"
-          :model="form"
-          :rules="rules"
-          class="text-center"
-        >
-          <h3 style="font-size: 16px">忘记密码</h3>
-          <el-form-item prop="email">
-            <el-input
-              v-model="form.email"
-              size="large"
-              placeholder="请输入邮箱"
-            ></el-input>
-          </el-form-item>
-          <el-form-item prop="code" class="mt-8">
-            <el-input
-              v-model="form.code"
-              size="large"
-              placeholder="请输入验证码"
-            ></el-input>
-            <el-button
-              class="get-code-btn"
-              type="text"
-              :disabled="disabled"
-              @click="getVertifyCode"
-            >
-              {{ isSending }}
-            </el-button>
-          </el-form-item>
-          <el-form-item class="mt-8">
-            <el-button
-              size="large"
-              style="width: 100%"
-              type="primary"
-              round
-              @click="resetPassword"
-              >下一步</el-button
-            >
-          </el-form-item>
-        </el-form>
-        <span class="logines" @click="$router.go(-1)">&lt; 返回登录</span>
+      <el-form ref="ruleForm" :model="form" :rules="rules" class="text-center">
+        <h3 style="font-size: 16px">忘记密码</h3>
+        <el-form-item prop="email">
+          <el-input
+            v-model="form.email"
+            size="large"
+            placeholder="请输入邮箱"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="code" class="mt-8">
+          <el-input
+            v-model="form.code"
+            size="large"
+            placeholder="请输入验证码"
+          ></el-input>
+          <el-button
+            class="get-code-btn"
+            type="text"
+            :disabled="disabled"
+            @click="getVertifyCode"
+          >
+            {{ isSending }}
+          </el-button>
+        </el-form-item>
+        <el-form-item class="mt-8">
+          <el-button
+            size="large"
+            style="width: 100%"
+            type="primary"
+            round
+            @click="resetPassword"
+            >下一步</el-button
+          >
+        </el-form-item>
+      </el-form>
+      <span class="logines" @click="$router.go(-1)">&lt; 返回登录</span>
     </div>
   </div>
 </template>
@@ -62,7 +57,7 @@ export default {
       isSending: '获取验证码',
       form: {
         code: '',
-        email: ''
+        email: '',
       },
       rules: {
         email: [
@@ -102,13 +97,13 @@ export default {
         if (valid) {
           this.$router.push({
             path: '/user/resetPwd',
-            query: { code: this.form.code, email: this.form.email }
-          });
+            query: { code: this.form.code, email: this.form.email },
+          })
         } else {
-          console.log('error submit!!');
-          return false;
+          console.log('error submit!!')
+          return false
         }
-      });
+      })
     },
     async getVertifyCode() {
       if (this.form.email === '') {
@@ -117,30 +112,29 @@ export default {
       }
       if (reg.test(this.form.email)) {
         try {
-            this.isSending = '发送验证码中'
-            this.disabled = true
-            await this.$axios.$post('/user/getVerifyCode', {
-              email: this.form.email,
-              type: 'resetPwd',
-            })
+          this.isSending = '发送验证码中'
+          this.disabled = true
+          await this.$axios.$post('/user/getVerifyCode', {
+            email: this.form.email,
+            type: 'resetPwd',
+          })
 
-            let second = 60
+          let second = 60
+          this.isSending = `${second}后可重新发送`
+          const timer = setInterval(() => {
+            --second
             this.isSending = `${second}后可重新发送`
-            const timer = setInterval(() => {
-              --second
-              this.isSending = `${second}后可重新发送`
-              if (second === 0) {
-                this.isSending = '重新获取验证码'
-                this.disabled = false
-                clearInterval(timer)
-              }
-            }, 1000)
-            Message.success('邮件发送成功')
+            if (second === 0) {
+              this.isSending = '重新获取验证码'
+              this.disabled = false
+              clearInterval(timer)
+            }
+          }, 1000)
+          Message.success('邮件发送成功')
         } catch (error) {
-            this.isSending = '重新获取验证码'
-            this.disabled = false
+          this.isSending = '重新获取验证码'
+          this.disabled = false
         }
-        
       } else {
         Message.error('邮箱账号不合法')
       }
@@ -172,7 +166,7 @@ export default {
 
 .logines {
   font-size: 12px;
-  color:#fff;
+  color: #fff;
   cursor: pointer;
 }
 

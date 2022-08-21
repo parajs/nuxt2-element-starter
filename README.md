@@ -76,3 +76,5 @@ More information about the usage of this directory in [the documentation](https:
 - [Nuxt.js 中未获取到返回的参数值](https://blog.csdn.net/mrmengj/article/details/113109352)
 - [nuxt 使用 vuex 存储及获取用户信息踩坑的解决](https://www.jb51.net/article/246530.htm)
 - [nuxt.js 服务端请求时带上 token 实现详解](https://www.jianshu.com/p/0da125ec3f95)
+- [swagger api](http://www.kuggamax2.paradeum.com:8020/swagger/index.html)
+- [dukeforum 原型地址](https://v5td5s.axshare.com)

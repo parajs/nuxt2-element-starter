@@ -1,6 +1,6 @@
-import DayJs from "dayjs";
-import Vue from "vue";
+import DayJs from 'dayjs'
+import Vue from 'vue'
 
 export default function ({ app }) {
-  Vue.prototype.$dayjs = DayJs;
+  Vue.prototype.$dayjs = DayJs
 }

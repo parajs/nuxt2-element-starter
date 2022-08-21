@@ -39,30 +39,32 @@
         :text="user.userAbbr"
       />
       <template #dropdown>
-        <el-dropdown-menu >
+        <el-dropdown-menu>
           <el-dropdown-item @click.native="$router.push('/tempForum/add')">
-            <div class="dropdown-item" >
-              <i class="el-icon-plus"></i>{{$t('header.createtempforum')}}
+            <div class="dropdown-item">
+              <i class="el-icon-plus"></i>{{ $t('header.createtempforum') }}
             </div>
           </el-dropdown-item>
           <el-dropdown-item @click.native="$router.push('/user/homepage')">
             <div class="dropdown-item">
-              <i class="el-icon-user"></i>{{$t('header.homepage')}}
+              <i class="el-icon-user"></i>{{ $t('header.homepage') }}
             </div>
           </el-dropdown-item>
           <el-dropdown-item @click.native="$router.push('/user/setting')">
             <div class="dropdown-item">
-              <i class="el-icon-setting"></i>{{$t('header.accountsetting')}}
+              <i class="el-icon-setting"></i>{{ $t('header.accountsetting') }}
             </div>
           </el-dropdown-item>
           <el-dropdown-item @click.native="$router.push('/user/feedback')">
             <div class="dropdown-item">
-              <i class="el-icon-edit-outline"></i>{{$t('header.feedback')}}
+              <i class="el-icon-edit-outline"></i>{{ $t('header.feedback') }}
             </div>
           </el-dropdown-item>
 
           <el-dropdown-item @click.native="logout">
-            <div class="dropdown-item"><i class="el-icon-edit"></i>{{$t('header.logout')}}</div>
+            <div class="dropdown-item">
+              <i class="el-icon-edit"></i>{{ $t('header.logout') }}
+            </div>
           </el-dropdown-item>
         </el-dropdown-menu>
       </template>

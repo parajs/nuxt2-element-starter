@@ -17,8 +17,7 @@
   },
   "lint-staged": {
     "*.{js,vue}": "eslint --cache",
-    "*.{css,scss,sass,html,vue}": "stylelint",
-    "*.**": "prettier --check --ignore-unknown"
+    "*.{css,scss,sass,html,vue}": "stylelint"
   },
   "dependencies": {
     "@nuxtjs/auth-next": "^5.0.0-1648802546.c9880dc",

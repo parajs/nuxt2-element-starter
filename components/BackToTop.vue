@@ -11,10 +11,9 @@
   </el-button>
 </template>
 <script>
-
 export default {
   name: 'BackToTop',
-  data(){
+  data() {
     return {
       isShow: false,
     }
@@ -25,24 +24,21 @@ export default {
   unmounted() {
     document.removeEventListener('scroll', this.scroll)
   },
-   methods: {
-      scroll() {
-        const scrollTop =
-          document.documentElement.scrollTop || document.body.scrollTop;
-        scrollTop > 200
-          ? (this.isShow = true)
-          : (this.isShow = false)
-      },
-      backToTop(){
-        window.scroll({
-          left: 0,
-          top: 0,
-          behavior: 'smooth'
-        });
-      }
-   }
-}        
-
+  methods: {
+    scroll() {
+      const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop
+      scrollTop > 200 ? (this.isShow = true) : (this.isShow = false)
+    },
+    backToTop() {
+      window.scroll({
+        left: 0,
+        top: 0,
+        behavior: 'smooth',
+      })
+    },
+  },
+}
 </script>
 <style scoped>
 .back-top {
