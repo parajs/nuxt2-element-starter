@@ -1,6 +1,18 @@
-import DayJs from "dayjs";
-import Vue from "vue";
+export default function ({ $dayjs, i18n }) {
+  const defaultLocale = i18n.defaultLocale;
+  let locale = "";
 
-export default function ({ app }) {
-  Vue.prototype.$dayjs = DayJs;
+  if (defaultLocale === "zh-CN") {
+    locale = "zh-cn";
+  }
+
+  if (defaultLocale === "zh-TW") {
+    locale = "zh-tw";
+  }
+
+  if (defaultLocale === "en-US") {
+    locale = "en";
+  }
+
+  $dayjs.locale(locale);
 }

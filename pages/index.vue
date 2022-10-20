@@ -21,12 +21,10 @@
 </template>
 
 <script>
-import CommonHeader from '~/components/CommonHeader.vue'
 export default {
   name: 'IndexPage',
-  components: { CommonHeader },
   async asyncData({ $axios }) {
-    const { list = [] } = await $axios.$get('/item/GetHomeList', {
+    const { list = [] } = await $axios.$get('/topic/GetOpenTopicList', {
       params: {
         pageIndex: 1,
         pageSize: 10,

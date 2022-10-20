@@ -1,4 +1,3 @@
-import "dayjs/locale/zh-tw";
 import zhLocale from "element-ui/lib/locale/lang/zh-TW";
 
 export default {

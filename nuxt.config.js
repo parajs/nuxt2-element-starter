@@ -1,14 +1,26 @@
+// 加载环境变量
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`
+})
+
+const BASE_URL = process.env.BASE_URL
+
 export default {
+  server: {
+    port: 8040, // default: 3000
+    host: "0.0.0.0", // default: localhost,
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "nuxt-element-starter",
+    title: "DukeForum",
     htmlAttrs: {
       lang: "en",
     },
     meta: [
       { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
+      { name: "viewport", content: "width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover" },
+      { hid: "keyword", name: "keyword", content: "DukeForum,dukeforum,forum,duke,Anonymous forum" },
+      { hid: "description", name: "description", content: "Dukefoum anonymous forum, where you can post topics and discuss and interact with forum members." },
       { name: "format-detection", content: "telephone=no" },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
@@ -17,16 +29,20 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ["@/style/theme/index.css", "@/style/global.css"],
 
-  router: {
-    middleware: ["user-agent"],
-  },
-
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     "@/plugins/element-ui",
-    "@/plugins/store",
     "@/plugins/dayjs",
+    "@/plugins/store",
     "@/plugins/axios",
+    {
+      src: '@/plugins/disableScale',
+      mode: 'client'
+    },
+    {
+      src: '@/plugins/refreshToken',
+      mode: 'client'
+    }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -46,8 +62,19 @@ export default {
     "@nuxtjs/axios",
     "@nuxtjs/proxy",
     "cookie-universal-nuxt",
+    "@nuxtjs/dayjs",
     "@nuxtjs/i18n",
+    "nuxt-user-agent",
   ],
+  // Optional
+  dayjs: {
+    locales: ["en", "zh-cn", "zh-tw"],
+    defaultLocale: "zh-cn",
+    plugins: [
+      "updateLocale",
+      "relativeTime", // import 'dayjs/plugin/timezone'
+    ], // Your Day.js plugin
+  },
   i18n: {
     strategy: "no_prefix",
     detectBrowserLanguage: {
@@ -68,10 +95,10 @@ export default {
         file: "zh-CN.js",
       },
       {
-        code: "tw-CN",
+        code: "zh-TW",
         name: "繁體中文",
-        iso: "tw-CN",
-        file: "tw-CN.js",
+        iso: "zh-TW",
+        file: "zh-TW.js",
       },
     ],
     lazy: true,
@@ -80,37 +107,46 @@ export default {
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  // axios: {
-  //   proxy: true,
-  //   // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-  //   baseURL: "https://api.nuxtjs.dev/api",
-  // },
-  proxy: {
-    "/api/": "http://www.kuggamax2.paradeum.com:8010",
-    "/static/": "http://www.kuggamax2.paradeum.com:8010",
+  axios: {
+    proxy: true,
+    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
+    prefix: "/api/v1",
   },
+  proxy: {
+    "/api/": BASE_URL,
+    "/static/": BASE_URL,
+  },
+ 
   publicRuntimeConfig: {
-    axios: {
-      proxy: true,
-      // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-      // 定义用于发出客户端请求的基本 URL,生产环境中浏览器可见
-      browserBaseURL: "/api/v1",
-    },
+    BASE_URL,
     cookie: {
       path: "/",
       maxAge: 1000 * 60 * 60 * 10,
     },
   },
   privateRuntimeConfig: {
-    axios: {
-      // 定义用于发出服务器端请求的基本 URL,生产环境中浏览器不可见，服务端可见
-      baseURL: "http://www.kuggamax2.paradeum.com:8010/api/v1",
-    },
+
   },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extend(config, { isDev }) {
+      if(!isDev){
+        config.module.rules.push({
+          test: /\.js$/,
+          exclude: /(node_modules)/,
+          use: [
+              {
+                  loader: "remove-console-loader",
+                  options: {
+                      "exclude": [ "error", "warn"]
+                  }
+              }
+          ],
+        })
+      }
+    },
     postcss: null,
-    analyze: true,
     transpile: [/^element-ui/],
   },
-};
+}
