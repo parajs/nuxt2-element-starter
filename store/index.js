@@ -18,16 +18,6 @@ export const mutations = {
 }
 
 export const actions = {
-<<<<<<< HEAD
-=======
-  nuxtServerInit({ commit }) {
-    // console.log("context", this);
-    // 从cookie中获取，并且将其中的数据更新到store
-    const cookies = this.$cookies.getAll()
-    commit('mutateState', cookies)
-  },
-
->>>>>>> 44b6bae17bb57bfa149b142d24db25cd15c24e05
   async loginPassword({ commit }, payload) {
     try {
       const data = await this.$axios.$post('/login/password', payload)
@@ -69,17 +59,9 @@ export const actions = {
       return Promise.reject(error)
     }
   },
-<<<<<<< HEAD
   logout({ commit }) {
     this.$cookies.removeAll();
     commit("mutateState", { token: "", user: "" });
     return Promise.resolve('登出成功')
-=======
-  async logout({ commit }) {
-    await this.$axios.$post('/user/logout')
-    this.$cookies.removeAll()
-    commit('mutateState', { token: '', user: '' })
-    this.$router.push('/')
->>>>>>> 44b6bae17bb57bfa149b142d24db25cd15c24e05
   },
 }
