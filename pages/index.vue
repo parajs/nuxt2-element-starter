@@ -23,6 +23,7 @@
 <script>
 export default {
   name: 'IndexPage',
+<<<<<<< HEAD
   async asyncData({ $axios }) {
     const { list = [] } = await $axios.$get('/topic/GetOpenTopicList', {
       params: {
@@ -31,6 +32,17 @@ export default {
       },
     })
     return { list }
+=======
+  components: { CommonHeader },
+  asyncData({ $axios }) {
+    // const { list = [] } = await $axios.$get('/item/GetHomeList', {
+    //   params: {
+    //     pageIndex: 1,
+    //     pageSize: 10,
+    //   },
+    // })
+    return { list: [] }
+>>>>>>> 44b6bae17bb57bfa149b142d24db25cd15c24e05
   },
   data() {
     return {

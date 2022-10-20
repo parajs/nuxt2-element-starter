@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import md5 from 'md5';
+=======
+import md5 from 'md5'
+>>>>>>> 44b6bae17bb57bfa149b142d24db25cd15c24e05
 
 /**
  * md5加密
@@ -14,6 +18,7 @@ export function md5Encode(message) {
 
 export function typeCheck(param) {
   return Object.prototype.toString.call(param)
+<<<<<<< HEAD
 }
 
 /**
@@ -44,4 +49,6 @@ export function typeCheck(param) {
 export function truncateInnerText(html) {
     const reg = /<[^<>]+>/g
     return html.replace(reg, '')
+=======
+>>>>>>> 44b6bae17bb57bfa149b142d24db25cd15c24e05
 }
